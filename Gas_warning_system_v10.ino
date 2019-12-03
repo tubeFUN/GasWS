@@ -40,24 +40,22 @@ void setup()
   digitalWrite(pin_buzzer, 0);
   digitalWrite(pin_SMS, 0);
 
-  Serial.begin(9600);
-  Serial1.begin(9600);
+  Serial.begin(9600); //Computer communication
+  Serial1.begin(9600); //GSM modem communication
   
   delay(1000); //Time to connect to the network
 
   //connection_OK dodac
   send_SMS(message1); //SMS as a test system (13 seconds takes)
   
-  //delay(1000); //Sensor worming up
+  //delay(1000); //Worming sensor up
 }
-
 
 void loop() 
 {
   switch(alarm_state)
   {
-    case 1:
-    //Waiting
+    case 1:    //Waiting
     Serial.println("Case1");
     digitalWrite(pin_green_LED, 1);
     sensor_value = analogRead(pin_gas_sensor);
@@ -67,8 +65,8 @@ void loop()
     
     if (sensor_value > gas_threshold)
       alarm_state = 2;
+      
     get_time();
-    
     if (check_time()) //Check time for sending daily SMS
       send_SMS(message3);
       
@@ -77,8 +75,7 @@ void loop()
     break;
 
 
-    case 2:
-    //Alarming
+    case 2:  //Alarming
     Serial.println("Case2");
     sensor_value = analogRead(pin_gas_sensor);
     Serial.print("Gas value: ");
@@ -111,16 +108,14 @@ void loop()
     break;
 
 
-    case 3:
-    //Reset
+    case 3:  //Reset
     Serial.println("Case3");
     i = 0;
     j = 0;
     alarm_state = 1;
     break;
 
-    case 4:
-    //Halt system
+    case 4:  //Halt system
     digitalWrite(pin_red_LED, 1);
     digitalWrite(pin_green_LED, 0);
     digitalWrite(pin_buzzer, 0);
