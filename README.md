@@ -9,6 +9,8 @@
 * [Features](#features)
 * [Status](#status)
 * [Inspiration](#inspiration)
+* [Parts and footprints list](#Parts-and-footprints-list)
+* [Allowed SMS commands](#Allowed-SMS-commands)
 * [Contact](#contact)
 
 ## General info
@@ -53,6 +55,12 @@ Project is: _in progress_.
 
 ## Inspiration
 Project based on... my need.
+
+## Parts and footprints list
+
+## Allowed SMS commands 
+0 - System halt
+
 
 ## Contact
 TBD
