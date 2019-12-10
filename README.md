@@ -25,23 +25,24 @@ Information about exceed sensor value is send to declared phone number via SMS.
 * Arduino Mega 2560 as a testing board
 * KiCad 5.1.4 as EDA Suite
 * freeRouting.jar as an autorouter
+* USBASP v2.0 as a target programmer
 
 ## Setup
 TBD, it won't be dificult.
 
 ## Code Examples
-Show examples of usage:
-`put-your-code-here`
+Show examples of usage: TBD
 
 ## Features
 List of features ready and TODOs for future development
 * Adaptable system
 * All modules (uC, converters, GSM modem, buffer power supply with battery) on one PCB
-* Battery powered system as a backup
+* Battery powered system as a backup with protection circuit
 * Self made
-* System Monitoring by LED indicators and via USB (virtual COM in OS)
-* Alamrming by SMS, sound (buzzer) and visually
-* Reset switch 
+* System monitoring by LED indicators and via USB (virtual COM in OS)
+* Alarming by SMS, sound (buzzer) and visually
+* Reset switch
+* On board programming by USBASP 
 
 To-do list:
 * Adding additional sensors and appropriate code
@@ -51,7 +52,7 @@ To-do list:
 Project is: _in progress_.
 
 ## Inspiration
-Project based on...
+Project based on... my need.
 
 ## Contact
-Created by my
+TBD
