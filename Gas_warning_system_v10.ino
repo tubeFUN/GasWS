@@ -1,5 +1,4 @@
 /*
- * Project no 1
  * Gas Warning System
  */
 
@@ -9,7 +8,6 @@
 #define pin_green_LED 10
 #define pin_gas_sensor A0
 #define pin_buzzer 11
-#define pin_SMS 12
 #define pin_switch 8
 
 
@@ -18,12 +16,12 @@ int j = 0; //Auxiliary variable
 int gas_threshold = 700; //Set gas threshold (min 0 - max 1023)
 volatile int alarm_state = 1;
 int sensor_value = 0;
-String destination_number1 = "000000000";
-char message1[] = "Gas system armed";
-char message2[] = "Alarm - gas level exceed";
-char message3[] = "Daily test";
-char date_AT[11];
-char time_AT[9];
+String destination_number1 = "000000000"; //9-digits format
+char message1[] = "Gas system armed"; //Message send after initialization
+char message2[] = "Alarm - gas level exceed"; // Send after exceeding the gas set threshold
+char message3[] = "Daily test"; //Message sent daily to check operation of the system
+char date_AT[11]; //Date read from GSM network
+char time_AT[9]; //Time read from GSM network
 char send_time[8] = "22:44:0"; //Set time to send daily SMS
 
 void setup() 
@@ -32,34 +30,30 @@ void setup()
   pinMode(pin_green_LED, OUTPUT);
   pinMode(pin_gas_sensor, INPUT);
   pinMode(pin_buzzer, OUTPUT);
-  pinMode(pin_SMS, OUTPUT);
   pinMode(pin_switch, INPUT_PULLUP);
 
   digitalWrite(pin_red_LED, 0);
   digitalWrite(pin_green_LED, 0);
   digitalWrite(pin_buzzer, 0);
-  digitalWrite(pin_SMS, 0);
-
-  Serial.begin(9600); //Computer communication
-  Serial1.begin(9600); //GSM modem communication
   
-  delay(1000); //Time to connect to the network
-
-  //connection_OK dodac
-  send_SMS(message1); //SMS as a test system (13 seconds takes)
+  Serial.begin(9600); //Communication with computer
+  Serial1.begin(9600); //Communication with GSM modem
   
-  //delay(1000); //Worming sensor up
+  delay(1000); //Time required to connect to the network and worming sensor up
+
+  send_SMS(message1); //SMS as a test system
 }
+
 
 void loop() 
 {
   switch(alarm_state)
   {
-    case 1:    //Waiting
+    case 1:    //State 1 - Waiting
     Serial.println("Case1");
     digitalWrite(pin_green_LED, 1);
     sensor_value = analogRead(pin_gas_sensor);
-    delay(500); //Measure every half second
+    delay(500); //Delay for measure every half second
     Serial.print("Gas value: ");
     Serial.println(sensor_value);
     
@@ -67,15 +61,16 @@ void loop()
       alarm_state = 2;
       
     get_time();
-    if (check_time()) //Check time for sending daily SMS
+    
+    if (check_time()) //Check the time for sending daily SMS
       send_SMS(message3);
       
-    if (received_SMS == '0') //Check incoming SMS for system halt command 
+    if (received_SMS() == '0') //Check incoming SMS for system halt command 
     alarm_state = 4;
     break;
 
 
-    case 2:  //Alarming
+    case 2:  //State 2 - Alarming
     Serial.println("Case2");
     sensor_value = analogRead(pin_gas_sensor);
     Serial.print("Gas value: ");
@@ -83,10 +78,10 @@ void loop()
     if (reset_time() == 0)
     {
       digitalWrite(pin_green_LED, 0);
-      digitalWrite(pin_red_LED, 1); //LED blinking
+      digitalWrite(pin_red_LED, 1); //Set blinking LED
       digitalWrite(pin_buzzer, 1);
       delay(100);
-      digitalWrite(pin_red_LED, 0);
+      digitalWrite(pin_red_LED, 0); //Set blinking LED
       if (digitalRead(pin_switch) == 0) //Continuous buzzer sound during
         digitalWrite(pin_buzzer, 1);    //button pressed
       else
@@ -99,7 +94,7 @@ void loop()
     if (j == 0)
     {
       digitalWrite(pin_buzzer, 1);
-      send_SMS(message2); //Send SMS only one time
+      send_SMS(message2); //Sending only one SMS
       j++;
     }
 
@@ -108,14 +103,15 @@ void loop()
     break;
 
 
-    case 3:  //Reset
+    case 3:  //State 3 - Reset
     Serial.println("Case3");
     i = 0;
     j = 0;
     alarm_state = 1;
     break;
 
-    case 4:  //Halt system
+
+    case 4:  //State 4 - System halt
     digitalWrite(pin_red_LED, 1);
     digitalWrite(pin_green_LED, 0);
     digitalWrite(pin_buzzer, 0);
@@ -131,7 +127,7 @@ char received_SMS()
 }
 
 
-bool check_time()
+bool check_time() //Comparison of the declared time with the real time
 {
   int k = 0;
   while (k < 7)
@@ -145,11 +141,11 @@ bool check_time()
 }
 
 
-void get_time()
+void get_time() //Getting the date and time from the network
 {
   Serial1.println("AT+CCLK?");
-  delay(1000);
-  char readed_data[60];
+  delay(1000); //Wait for answer from the network
+  char readed_data[60]; //Table to gather answer information
   int k = 0;
   while(Serial1.available() > 0)
   {
@@ -185,13 +181,13 @@ void get_time()
 }
 
 
-void send_SMS(char a[]) //SMS sending
+void send_SMS(char a[]) //SMS sending, all process takes 19 seconds
 {
   Serial1.println("AT");
   delay(2000);
-  while (modem_response() > 0);
+  while (modem_response() > 0); // For the first time 
   Serial1.println("AT+CMGF=1"); //It is needed to send AT+CLTS=1;&W
-  delay(2000);                  //Then restart modem, AT+CFUN=1,1
+  delay(2000);                  //Then restart the modem, AT+CFUN=1,1
   while (modem_response() > 0);
   /*
   Serial1.print("AT+CMGS=\"");
@@ -229,7 +225,7 @@ bool modem_response()
 
 
 
-bool reset_time() // Check the switch press time
+bool reset_time() // Check the reset switch press time. 2 seconds reset the system
 {
   while (digitalRead(pin_switch) == 0)
   {
