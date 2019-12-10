@@ -57,6 +57,7 @@ Project is: _in progress_.
 Project based on... my need.
 
 ## Parts and footprints list
+![Parts used to build Gas Warning System](./Parts_list.txt)
 
 ## Allowed SMS commands 
 0 - System halt
