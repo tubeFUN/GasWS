@@ -20,7 +20,8 @@ System board is powered from the power supply or from battery in case of power f
 Information about exceed sensor value is send to declared phone number via SMS.
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![Top side 3D](./img/Top_side.jpg)
+![Bottom side 3D](./img/Bottom_side.jpg)
 
 ## Technologies
 * Arduino 1.8.10 as an IDE
