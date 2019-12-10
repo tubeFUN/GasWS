@@ -51,7 +51,7 @@ To-do list:
 * Adding control and monitoring via SMS
 
 ## Status
-Project is: _in progress_. Gerber files are sent to manufacturer.
+Project is: _in progress_. Gerber files have been sent to manufacturer.
 
 ## Inspiration
 Project based on... my need and to refresh my abilities.
@@ -60,10 +60,10 @@ Project based on... my need and to refresh my abilities.
 ![Parts used to build Gas Warning System](./Parts_list.txt)
 
 ## Allowed (planned) SMS commands 
-0 - System halt
-1 - System start
-level - Current gas level
-read - Read last received SMS
+* 0 - System halt
+* 1 - System start
+* level - Current gas level
+* read - Read last received SMS
 
 
 
