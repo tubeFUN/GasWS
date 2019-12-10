@@ -10,7 +10,7 @@
 * [Status](#status)
 * [Inspiration](#inspiration)
 * [Parts and footprints list](#Parts-and-footprints-list)
-* [Allowed SMS commands](#Allowed-SMS-commands)
+* [Allowed (planned) SMS commands](#Allowed-(planned)-SMS-commands)
 * [Contact](#contact)
 
 ## General info
@@ -38,30 +38,33 @@ Show examples of usage: TBD
 
 ## Features
 List of features ready and TODOs for future development
-* Adaptable system
+* Adaptable system, 16 additional GPIO ports for future use
 * All modules (uC, converters, GSM modem, buffer power supply with battery) on one PCB
 * Battery powered system as a backup with protection circuit
-* Self made
-* System monitoring by LED indicators and via USB (virtual COM in OS)
+* System monitoring by LED indicators and via USB (virtual COM in OS, adjustable baud rate)
 * Alarming by SMS, sound (buzzer) and visually
 * Reset switch
-* On board programming by USBASP 
+* In system programming by USBASP 
 
 To-do list:
-* Adding additional sensors and appropriate code
-* Adding control via SMS
+* Adding more sensors and appropriate code
+* Adding control and monitoring via SMS
 
 ## Status
-Project is: _in progress_.
+Project is: _in progress_. Gerber files are sent to manufacturer.
 
 ## Inspiration
-Project based on... my need.
+Project based on... my need and to refresh my abilities.
 
 ## Parts and footprints list
 ![Parts used to build Gas Warning System](./Parts_list.txt)
 
-## Allowed SMS commands 
+## Allowed (planned) SMS commands 
 0 - System halt
+1 - System start
+level - Current gas level
+read - Read last received SMS
+
 
 
 ## Contact
