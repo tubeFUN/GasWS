@@ -20,9 +20,9 @@ String destination_number1 = "000000000"; //9-digits format
 char message1[] = "Gas system armed"; //Message send after initialization
 char message2[] = "Alarm - gas level exceed"; // Send after exceeding the gas set threshold
 char message3[] = "Daily test"; //Message sent daily to check operation of the system
+char send_time[] = "22:44:0"; //Set time to send daily SMS
 char date_AT[11]; //Date read from GSM network
 char time_AT[9]; //Time read from GSM network
-char send_time[8] = "22:44:0"; //Set time to send daily SMS
 
 void setup() 
 {
@@ -145,13 +145,35 @@ void get_time() //Getting the date and time from the network
 {
   Serial1.println("AT+CCLK?");
   delay(1000); //Wait for answer from the network
-  char readed_data[60]; //Table to gather answer information
+  char readed_data[60]; //Table to gather answer from network
   int k = 0;
   while(Serial1.available() > 0)
   {
     readed_data[k] = Serial1.read();
     k++;
   }
+/*
+char inData[20]; // Allocate some space for the string
+char inChar; // Where to store the character read
+byte index = 0; // Index into array; where to store the character
+
+void loop()
+{
+  while(Serial.available() > 0) // Don't read unless
+                                                 // there you know there is data
+  {
+      if(index < 19) // One less than the size of the array
+      {
+          inChar = Serial.read(); // Read a character
+          inData[index] = inChar; // Store it
+          index++; // Increment where to write next
+          inData[index] = '\0'; // Null terminate the string
+      }
+  }
+  // Now do something with the string (but not using ==)
+}
+
+*/
 
   Serial.print("Current date: ");
   date_AT[0] = readed_data[35];
