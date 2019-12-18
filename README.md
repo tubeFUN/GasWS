@@ -60,11 +60,10 @@ Project based on... my need and to refresh my abilities.
 ![Parts used to build Gas Warning System](./Parts_list.txt)
 
 ## Allowed (planned) SMS commands 
-* halt - System halt
-* start - System start
-* level - Current gas level
-* read - Read last received SMS
-
+* Halt - System halt
+* Start - System start
+* Level - Current gas level
+* Status - SMS with current date, time and gas level
 
 
 ## Contact
