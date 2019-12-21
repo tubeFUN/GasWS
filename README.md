@@ -49,9 +49,10 @@ List of features ready and TODOs for future development
 * In system programming by USBASP 
 
 To-do list:
-* Adding more sensors and appropriate code
 * Adding USSD code support
 * Improving the readability of the code
+* Check the program's resistance to incorrectly entered data
+* Adding more sensors and appropriate code
 
 ## Status
 Project is: _in progress_. Gerber files have been sent to manufacturer.
