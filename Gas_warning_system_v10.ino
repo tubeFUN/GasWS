@@ -14,19 +14,21 @@
 int j = 0; //Auxiliary variable
 int gas_threshold = 700; //Set gas threshold (min 0 - max 1023)
 volatile int alarm_state = 1;
-int sensor_value = 0;
-String destination_number1 = "500000000"; //9-digits format
-char message1[] = "Gas system armed"; //Message send after initialization
-char message2[] = "Alarm - gas level exceed"; // Send after exceeding the gas set threshold
-char message4[] = "Level"; //Allowed SMS - Current gas level
-char message5[] = "Halt"; //Allowed SMS - System halt
-char message6[] = "Start"; //Allowed SMS - System start
+int sensor_value = 0; //Gas sensor value
+String destination_number1 = "500000000"; //9-digits format destination number
+String destination_number2 = "*124*#"; //USSD code (ORANGE, POLAND)
+char message1[] = "Welcome. Gas system armed"; //Message sent after initialization
+char message2[] = "Alarm - gas level exceed"; // Message sent after exceeding the gas set threshold
+char message4[] = "Level"; //Message read out - Current gas level
+char message5[] = "Halt"; //Message read out - System halt
+char message6[] = "Start"; //Message read out - System start
 char message8[] = "System halted"; //Message sent after system halting
 char message9[] = "System restarted"; //Message sent after system restating
-char message10[] = "Status"; //Allowed SMS with current date, time and gas leve
+char message10[] = "Status"; //Message read out - Current date, time and gas leve
+char message11[] = "Account"; //Message read out - Account balance
 char date_AT[11]; //Date read from GSM network
 char time_AT[9]; //Time read from GSM network
-char readed_SMS[160]; //Readed SMS
+char readed_SMS[260]; //Readed SMS
 
 
 void setup() 
@@ -67,7 +69,7 @@ void setup()
    *  then restart the modem, AT+CFUN=1,1
    */
   
-  Serial1.println("AT");
+  Serial1.println("AT"); //Check modem status
   while (modem_response() > 0); 
   Serial1.println("AT+CMGF=1"); // Configuring SMS TEXT mode
   while (modem_response() > 0);
@@ -79,6 +81,8 @@ void setup()
   while (modem_response() > 0);
   Serial1.println("AT+CNMI=1,2,0,0,0"); // Forwarding SMS directly to the serial
   while (modem_response() > 0);
+  Serial1.println("AT+CPMS?"); //Preferred SMS storage. Used memory
+  while (modem_response() > 0);
 
   send_SMS(message1); //SMS as a test system
 }
@@ -88,16 +92,17 @@ void loop()
 {
   switch(alarm_state)
   {
-    //111111111111111111111111111111111111111111111111111111111111111111
-    case 1:    //State 1 - Waiting
-    Serial.println("Case1");
+    //==================================================================
+    //State 1 - Waiting
+    case 1:    
+    Serial.println("State 1 - Waiting");
     digitalWrite(pin_green_LED, 1);
-    sensor_value = analogRead(pin_gas_sensor);
+    sensor_value = analogRead(pin_gas_sensor);//Read gas value
     delay(2000); //Measure every two second
     Serial.print("Gas value: ");
     Serial.println(sensor_value);
     
-    if (sensor_value > gas_threshold)
+    if (sensor_value > gas_threshold)//Go to stage two after crossing the gas threshold.
       alarm_state = 2;
 
     if (receive_SMS()) //Checking if a new SMS is available
@@ -108,15 +113,15 @@ void loop()
         send_SMS(message8); //Send SMS informing about system halt
       }
       
-      if (check_message(message10)) //Check incoming SMS for system status command
+      else if (check_message(message10)) //Check incoming SMS for system status command
       {
-        get_time();
+        get_time(); //Get time from GSM network
         delay(500);
-        sensor_value = analogRead(pin_gas_sensor);
+        sensor_value = analogRead(pin_gas_sensor); //Read gas value
         char sensor_value_char[4];
         delay(200);
         char temp_array[80];
-        sprintf(sensor_value_char, "%d", sensor_value); //int to char conversion
+        sprintf(sensor_value_char, "%d", sensor_value); //Int to char conversion
         strcpy (temp_array, "Day: ");
         strcat (temp_array, date_AT);
         strcat (temp_array, "\n");
@@ -129,25 +134,43 @@ void loop()
         send_SMS(temp_array); //Send SMS status information
       }
 
-      if (check_message(message4)) //Check incoming SMS for gas level command
+      else if (check_message(message4)) //Check incoming SMS for gas level command
       {
-        sensor_value = analogRead(pin_gas_sensor);
+        sensor_value = analogRead(pin_gas_sensor);//Read gas value
         char sensor_value_char[4];
         delay(200);
         char temp_array[20];
-        sprintf(sensor_value_char, "%d", sensor_value); //int to char conversion
+        sprintf(sensor_value_char, "%d", sensor_value); //Int to char conversion
         strcpy (temp_array, "Gas level: ");
         strcat (temp_array, sensor_value_char);
         Serial.println(temp_array);
         send_SMS(temp_array); //Send SMS informing about gas level
       }
+      
+      else if (check_message(message11)) //Check incoming SMS for accound status command
+      {
+        check_account(destination_number2);//Make call to USSD code
+        if (receive_SMS()) //Checking if a new SMS is available
+        {
+          Serial.println(readed_SMS);
+          send_SMS(readed_SMS);
+        }
+      }
+      /*
+      else //Send mismatched messages to destination_number1
+      {
+        Serial.println(readed_SMS);
+        send_SMS(readed_SMS);
+      }
+      */    
     }
     break;
 
 
-    //222222222222222222222222222222222222222222222222222222222222222222
-    case 2:  //State 2 - Alarming
-    Serial.println("Case2");
+    //==================================================================
+    //State 2 - Alarming
+    case 2:  
+    Serial.println("State 2 - Alarming");
     sensor_value = analogRead(pin_gas_sensor);
     Serial.print("Gas value: ");
     Serial.println(sensor_value);
@@ -164,13 +187,13 @@ void loop()
         digitalWrite(pin_buzzer, 0);
       delay(100);
     }
-    else
+    else//Go to stage three after reset pushed.
       alarm_state = 3;
 
     if (j == 0)
     {
       digitalWrite(pin_buzzer, 1);
-      send_SMS(message2); //Sending only one SMS
+      send_SMS(message2); //Send SMS informing about gas level exceed
       j++;
     }
 
@@ -185,21 +208,24 @@ void loop()
     break;
 
 
-    //33333333333333333333333333333333333333333333333333333333333333333
-    case 3:  //State 3 - Reset
-    Serial.println("Case3");
+    //==================================================================
+    //State 3 - Reset
+    case 3:  
+    Serial.println("State 3 - Reset");
     j = 0;
     alarm_state = 1;
     break;
 
 
-    //44444444444444444444444444444444444444444444444444444444444444444
-    case 4:  //State 4 - System halt
-    Serial.println("Case4");
+    //==================================================================
+    //State 4 - System halt
+    case 4:  
+    Serial.println("State 4 - System halt");
     digitalWrite(pin_red_LED, 1);
     digitalWrite(pin_green_LED, 0);
     digitalWrite(pin_buzzer, 0);
     delay(1000);
+    
     if (receive_SMS()) //Checking if SMS is available
     {
       if (check_message(message6)) //Check incoming SMS for system start command
@@ -217,15 +243,15 @@ void loop()
 bool receive_SMS()
 {
   int k = 0;
-  char CNMI_message[160];
+  char CNMI_message[360];
   while (Serial1.available() > 0)
   {
     CNMI_message[k] = Serial1.read();
-    Serial.print(CNMI_message[k]);
+    //Serial.print(CNMI_message[k]);
     k++;
     CNMI_message[k] = '\0'; //Terminate string array
   }
-  
+
   /*
    * Parsing CNMI message to obtain raw SMS.
    * Information about sender number and arrival date and time are discarded.
@@ -233,7 +259,7 @@ bool receive_SMS()
    
   if (k > 0)
   {
-    k = 0; //Looking for SMS start
+    k = 0; //Looking for raw SMS start from CNMI message
     while (!(CNMI_message[k] == '"' && CNMI_message[k + 1] == '\r'))
     {
       k++;
@@ -246,7 +272,10 @@ bool receive_SMS()
       i++;
     }
     readed_SMS[i] = '\0';
-    Serial.println(readed_SMS);
+    Serial.print("CNMI Message: ");
+    Serial.println(CNMI_message);//CNMI Message
+    Serial.print("Readed SMS: ");
+    Serial.println(readed_SMS);//Raw SMS
     return 1;
   }
   return 0;
@@ -275,13 +304,13 @@ void get_time() //Getting the date and time from the network
 {
   Serial1.println("AT+CCLK?");
   delay(1000); //Wait for answer from the network
-  char CCLK_message[60]; //Table to gather answer from the network
+  char CCLK_message[60]; //Array to gather answer from the network
   int k = 0;
   while(Serial1.available() > 0)
   {
     if (k < 59)
     {
-      CCLK_message[k] = Serial1.read();
+      CCLK_message[k] = Serial1.read();//Saving answer to the array
       k++;
       CCLK_message[k] = '\0'; //Terminate string array
     }
@@ -314,7 +343,7 @@ void get_time() //Getting the date and time from the network
 }
 
 
-void send_SMS(char a[]) //SMS sending
+void send_SMS(char a[]) //Sending SMS
 {
   Serial1.print("AT+CMGS=\""); //Set destination number
   Serial1.print(destination_number1);
@@ -324,10 +353,12 @@ void send_SMS(char a[]) //SMS sending
   Serial1.write(26); //Special "CTRL-Z" character to send SMS
   delay(5000);
   Serial.println("SMS sent");
+  Serial1.println("AT+CMGDA=\"DEL ALL\""); //Delete All SMS
+  delay(5000); //Time required to delete 1 message
 }
 
 
-bool modem_response() //Redirect modem answers to computer Serial
+bool modem_response() //Redirect GSM modem answers to computer Serial
 {
   delay(2000);
   while (Serial1.available() > 0)
@@ -355,4 +386,14 @@ bool reset_time() // Check the reset switch press time. 2 seconds reset the syst
   }
   digitalWrite(pin_buzzer, 0);
   return 0;
+}
+
+
+void check_account(String code) //Making a call. Sending USSD code
+{
+  Serial1.print("ATD+ "); //AT command to dial number
+  Serial1.print(code); //Number
+  Serial1.println(';');//Modifier at the end separates the dial string into multiple dial commands
+  delay(10000); //Wait for 10 seconds...
+  //mySerial.println("ATH"); //hang up if necessary
 }

@@ -26,6 +26,8 @@ Information about exceed sensor value is send to declared phone number via SMS.
 ## Technologies
 * Arduino 1.8.10 as an IDE
 * Arduino Mega 2560 as a testing board
+* MQ-2 Gas Sensor
+* SIM800C 2G module
 * KiCad 5.1.4 as EDA Suite
 * freeRouting.jar as an autorouter
 * USBASP v2.0 as a target programmer
@@ -48,7 +50,8 @@ List of features ready and TODOs for future development
 
 To-do list:
 * Adding more sensors and appropriate code
-* Adding control and monitoring via SMS
+* Adding USSD code support
+* Improving the readability of the code
 
 ## Status
 Project is: _in progress_. Gerber files have been sent to manufacturer.
@@ -59,12 +62,12 @@ Project based on... my need and to refresh my abilities.
 ## Parts and footprints list
 ![Parts used to build Gas Warning System](./Parts_list.txt)
 
-## Allowed (planned) SMS commands 
+## Allowed SMS commands to Gas Warning System
 * Halt - System halt
 * Start - System start
 * Level - Current gas level
 * Status - SMS with current date, time and gas level
-
+* Account - Account balance
 
 ## Contact
 TBD
