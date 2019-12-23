@@ -21,7 +21,13 @@ Information about exceed sensor value is send to declared phone number via SMS.
 
 ## Screenshots
 ![Top side 3D](./img/Top_side.jpg)
+3D wiew of PCB top side version 1.1
+![Top side real](./img/Real_top_side.jpg)
+Real wiew of PCB top side version 1.0
 ![Bottom side 3D](./img/Bottom_side.jpg)
+3D wiew of PCB bottom side version 1.1
+![Bottom side real](./img/Bottom_side.jpg)
+Real wiew of PCB bottom side version 1.0
 
 ## Technologies
 * Arduino 1.8.10 as an IDE
