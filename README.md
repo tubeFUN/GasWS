@@ -11,6 +11,7 @@
 * [Inspiration](#inspiration)
 * [Parts and footprints list](#Parts-and-footprints-list)
 * [Allowed (planned) SMS commands](#Allowed-(planned)-SMS-commands)
+* [Principle of operation](#principle-of-operation)
 * [Contact](#contact)
 
 ## General info
@@ -64,7 +65,7 @@ To-do list:
 * Adding more sensors and appropriate code
 
 ## Status
-Project is: _in progress_. Gerber files have been sent to manufacturer.
+Project is: _in progress_. Board is tested.
 
 ## Inspiration
 Project based on... my need and to refresh my abilities.
@@ -78,6 +79,11 @@ Project based on... my need and to refresh my abilities.
 * Level - Current gas level
 * Status - SMS with current date, time and gas level
 * Account - Account balance
+
+## Principle of operation
+![Schematic](./img/Schematic2.0.pdf)
+Board schematic version 2.0
+
 
 ## Contact
 TBD
