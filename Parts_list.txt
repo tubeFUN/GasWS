@@ -1,92 +1,92 @@
-Reference	 Value	 Footprint	 Datasheet
-U2	SIM800C	RF_GSM:SIMCom_SIM800C	http://simcom.ee/documents/SIM800C/SIM800C_Hardware_Design_V1.05.pdf
-R3	10k	Resistor_SMD:R_1206_3216Metric	~
-R4	10k	Resistor_SMD:R_1206_3216Metric	~
-R5	10k	Resistor_SMD:R_1206_3216Metric	~
-R1	10k	Resistor_SMD:R_1206_3216Metric	~
-C1	100uF Tantal ESR	Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D	 T494C107K010AT
-C3	33pF	Capacitor_SMD:C_1206_3216Metric	~
-C2	1uF	Capacitor_SMD:C_1206_3216Metric	~
-D1	5V1	smd-semi:SOD-80	https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzt52b2v4.pdf
-C8	100nF	Capacitor_SMD:C_1206_3216Metric	~
-C10	470uF ESR	Capacitor_SMD:CP_Elec_8x10.5	~
-Q2	BC847	Package_TO_SOT_SMD:SOT-23_Handsoldering	
-R6	47k	Resistor_SMD:R_1206_3216Metric	~
-R2	4,7k	Resistor_SMD:R_1206_3216Metric	~
-C4	4,7u	Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A	~
-Q3	BSS138	Package_TO_SOT_SMD:SOT-23_Handsoldering	https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf
-Q1	BSS138	Package_TO_SOT_SMD:SOT-23_Handsoldering	https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf
-R9	51R	Resistor_SMD:R_1206_3216Metric	~
-R8	51R	Resistor_SMD:R_1206_3216Metric	~
-R7	51R	Resistor_SMD:R_1206_3216Metric	~
-C5	22p	Capacitor_SMD:C_1206_3216Metric	~
-C7	22p	Capacitor_SMD:C_1206_3216Metric	~
-C9	100nF	Resistor_SMD:R_1206_3216Metric	~
-D2	ESD	Package_TO_SOT_SMD:SOT-23-6	www.st.com/resource/en/datasheet/esda6v1-5sc6.pdf
-C6	22p	Capacitor_SMD:C_1206_3216Metric	~
-R28	1k	Resistor_SMD:R_1206_3216Metric	~
-R27	1k	Resistor_SMD:R_1206_3216Metric	~
-D12	STATUS	Diode_SMD:D_1206_3216Metric	~
-D13	NET	Diode_SMD:D_1206_3216Metric	~
-R29	1k	Resistor_SMD:R_1206_3216Metric	~
-D14	RF	Diode_SMD:D_1206_3216Metric	~
-J6	Conn_Coaxial	Connector_Coaxial:SMA_Amphenol_132134_Vertical	 ~
-D11	LXES	Diode_SMD:D_SMA	http://www.jameco.com/Jameco/Products/ProdDS/1538777.pdf
-Y1	CSTCE16M0V53-R0	CSTCE16M0V53-R0:OSC_CSTCE16M0V53-R0	Murata
-R22	1M	Resistor_SMD:R_1206_3216Metric	~
-C15	100nF	Capacitor_SMD:C_1206_3216Metric	~
-J4	Digital	conn-100mil:CONN-100MIL-F-1x8	~
-ISP1	AVRISP	AVRISP:AVRISP	AVRISP
-IC2	TP4056	TP4056:SOP-8	TP4056
-IC3	DW01A-G	DW01A-G:SOT95P190X145-6N	http://www.ic-fortune.com/upload/Download/DW01x-DS-17_EN.pdf
-Q4	FS8205A	FS8205A:SOP65P640X120-8N	http://www.ic-fortune.com/upload/Download/FS8205A-DS-12_EN.pdf
-R24	1k	Resistor_SMD:R_1206_3216Metric	~
-R23	1k	Resistor_SMD:R_1206_3216Metric	~
-D9	STATUS	Diode_SMD:D_1206_3216Metric	~
-D10	NET	Diode_SMD:D_1206_3216Metric	~
-C18	100nF	Capacitor_SMD:C_1206_3216Metric	~
-C19	100nF	Capacitor_SMD:C_1206_3216Metric	~
-R30	100R	Resistor_SMD:R_1206_3216Metric	~
-R26	1k	Resistor_SMD:R_1206_3216Metric	~
-R25	1k	Resistor_SMD:R_1206_3216Metric	~
-BT1	Battery_Cell	Battery:BatteryHolder_Keystone_1042_1x18650	~
-C20	47uF	Capacitor_SMD:C_1210_3225Metric	~
-IC1	LT1308	LT1308ACS8#PBF:SOIC127P599X175-8N	https://www.analog.com/media/en/technical-documentation/data-sheets/1308abfb.pdf
-L1	4,7uH	LQH55DN4R7M03L:LQH55DN100M03L	~
-R15	100k	Resistor_SMD:R_1206_3216Metric	~
-R14	309k	Resistor_SMD:R_1206_3216Metric	~
-R13	47k	Resistor_SMD:R_1206_3216Metric	~
-C13	100p	Capacitor_SMD:C_1206_3216Metric	~
-C14	100uF	Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D	~
-C12	47uF	Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D	~
-R18	1k	Resistor_SMD:R_1206_3216Metric	~
-R16	1k	Resistor_SMD:R_1206_3216Metric	~
-R19	1k	Resistor_SMD:R_1206_3216Metric	~
-R17	1k	Resistor_SMD:R_1206_3216Metric	~
-D6	TX	Diode_SMD:D_1206_3216Metric	~
-D5	RX	Diode_SMD:D_1206_3216Metric	~
-R10	4,7k	Resistor_SMD:R_1206_3216Metric	~
-R11	10k	Resistor_SMD:R_1206_3216Metric	~
-C11	100nF	Capacitor_SMD:C_1206_3216Metric	~
-BZ1	Buzzer	Buzzer_Beeper:Buzzer_12x9.5RM7.6	~
-SW2	Alarm Reset	Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm	~
-SW1	SW_DIP_x01	Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm	~
-R21	1k	Resistor_SMD:R_1206_3216Metric	~
-D8	Status LED	Diode_SMD:D_1206_3216Metric	~
-R12	1k	Resistor_SMD:R_1206_3216Metric	~
-D3	Alarm LED	Diode_SMD:D_1206_3216Metric	~
-J3	Gas Sensor	CTB5202_3:SHDR3W100P0X500_1X3_1500X760X1020P	~
-C16	100nF	Capacitor_SMD:C_1206_3216Metric	~
-D7	LL4148	smd-semi:SOD-80	~
-R20	10k	Resistor_SMD:R_1206_3216Metric	~
-C17	22p	Capacitor_SMD:C_0805_2012Metric	~
-U1	ATmega2560-16AU	Package_QFP:TQFP-100_14x14mm_P0.5mm	
-F1	2A	Fuse:Fuse_2920_7451Metric	~
-U3	FT232RL	Package_SO:SSOP-28_5.3x10.2mm_P0.65mm	http://www.ftdichip.com/Products/ICs/FT232RL.htm
-J5	SIM	47553-1001:475531001	https://componentsearchengine.com/Datasheets/1/47553-1001.pdf
-J2	282836-9	282836-9:SHDR9W130P0X500_1X9_4500X820X1020P	
-J9	Power	CON-SOCJ-2155:CONSOCJ2155	
-J8	Power	CTB5202_3:SHDR3W100P0X500_1X3_1500X760X1020P	~
-J7	USB	10118194-0011LF:101181940011LF	https://cdn.amphenol-icc.com/media/wysiwyg/files/drawing/10118194.pdf
-C21	470uF ESR	Capacitor_SMD:CP_Elec_8x10.5	~
-D4	VS-10BQ015-M3_5BT	VS-10BQ015-M3_5BT:DIOM5436X244N	https://componentsearchengine.com/Datasheets/2/VS-10BQ015-M3_5BT.pdf
+Reference	 Value	 Footprint
+U2	SIM800C	RF_GSM:SIMCom_SIM800C
+R3	10k	Resistor_SMD:R_1206_3216Metric
+R4	10k	Resistor_SMD:R_1206_3216Metric
+R5	10k	Resistor_SMD:R_1206_3216Metric
+R1	10k	Resistor_SMD:R_1206_3216Metric
+C1	470uF Tantal ESR	Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D
+C3	33pF	Capacitor_SMD:C_1206_3216Metric
+C2	1uF	Capacitor_SMD:C_1206_3216Metric
+D1	5V1	smd-semi:SOD-80
+C8	100nF	Capacitor_SMD:C_1206_3216Metric
+C10	470uF ESR	Capacitor_SMD:CP_Elec_8x10.5
+Q2	BC847	Package_TO_SOT_SMD:SOT-23_Handsoldering
+R6	47k	Resistor_SMD:R_1206_3216Metric
+R2	4,7k	Resistor_SMD:R_1206_3216Metric
+C4	4,7u	Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A
+Q3	BSS138	Package_TO_SOT_SMD:SOT-23_Handsoldering
+Q1	BSS138	Package_TO_SOT_SMD:SOT-23_Handsoldering
+R9	51R	Resistor_SMD:R_1206_3216Metric
+R8	51R	Resistor_SMD:R_1206_3216Metric
+R7	51R	Resistor_SMD:R_1206_3216Metric
+C5	22p	Capacitor_SMD:C_1206_3216Metric
+C7	22p	Capacitor_SMD:C_1206_3216Metric
+C9	100nF	Resistor_SMD:R_1206_3216Metric
+D2	ESD	Package_TO_SOT_SMD:SOT-23-6
+C6	22p	Capacitor_SMD:C_1206_3216Metric
+R28	1k	Resistor_SMD:R_1206_3216Metric
+R27	1k	Resistor_SMD:R_1206_3216Metric
+D12	Modem Status	Diode_SMD:D_1206_3216Metric
+D13	NET	Diode_SMD:D_1206_3216Metric
+R29	1k	Resistor_SMD:R_1206_3216Metric
+D14	RF	Diode_SMD:D_1206_3216Metric
+J6	Conn_Coaxial	Connector_Coaxial:SMA_Amphenol_132134_Vertical
+D11	LXES	Diode_SMD:D_SMA
+Y1	CSTCE16M0V53-R0	CSTCE16M0V53-R0:OSC_CSTCE16M0V53-R0
+R22	1M	Resistor_SMD:R_1206_3216Metric
+C15	100nF	Capacitor_SMD:C_1206_3216Metric
+J4	Digital	conn-100mil:CONN-100MIL-F-1x8
+ISP1	AVRISP	AVRISP:AVRISP
+IC2	TP4056	TP4056:SOP-8
+IC3	DW01A-G	DW01A-G:SOT95P190X145-6N
+Q4	FS8205A	FS8205A:SOP65P640X120-8N
+R24	1k	Resistor_SMD:R_1206_3216Metric
+R23	1k	Resistor_SMD:R_1206_3216Metric
+D9	PWR	Diode_SMD:D_1206_3216Metric
+D10	CHRG	Diode_SMD:D_1206_3216Metric
+C18	100nF	Capacitor_SMD:C_1206_3216Metric
+C19	100nF	Capacitor_SMD:C_1206_3216Metric
+R30	100R	Resistor_SMD:R_1206_3216Metric
+R26	1k	Resistor_SMD:R_1206_3216Metric
+R25	1.2k	Resistor_SMD:R_1206_3216Metric
+BT1	Battery_Cell	Battery:BatteryHolder_Keystone_1042_1x18650
+C20	47uF	Capacitor_SMD:C_1210_3225Metric
+IC1	LT1308	LT1308ACS8#PBF:SOIC127P599X175-8N
+L1	4,7uH	LQH55DN4R7M03L:LQH55DN100M03L
+R15	100k	Resistor_SMD:R_1206_3216Metric
+R14	309k	Resistor_SMD:R_1206_3216Metric
+R13	47k	Resistor_SMD:R_1206_3216Metric
+C13	100p	Capacitor_SMD:C_1206_3216Metric
+C14	100uF	Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D
+C12	470uF	Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D
+R18	1k	Resistor_SMD:R_1206_3216Metric
+R16	1k	Resistor_SMD:R_1206_3216Metric
+R19	1k	Resistor_SMD:R_1206_3216Metric
+R17	1k	Resistor_SMD:R_1206_3216Metric
+D6	TX	Diode_SMD:D_1206_3216Metric
+D5	RX	Diode_SMD:D_1206_3216Metric
+R10	4,7k	Resistor_SMD:R_1206_3216Metric
+R11	10k	Resistor_SMD:R_1206_3216Metric
+C11	100nF	Capacitor_SMD:C_1206_3216Metric
+BZ1	Buzzer	Buzzer_Beeper:Buzzer_12x9.5RM7.6
+SW2	Alarm Reset	Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm
+R21	1k	Resistor_SMD:R_1206_3216Metric
+D8	System Status	Diode_SMD:D_1206_3216Metric
+R12	1k	Resistor_SMD:R_1206_3216Metric
+D3	Alarm LED	Diode_SMD:D_1206_3216Metric
+J3	Gas Sensor	CTB5202_3:SHDR3W100P0X500_1X3_1500X760X1020P
+C16	100nF	Capacitor_SMD:C_1206_3216Metric
+F1	2A	Fuse:Fuse_2920_7451Metric
+U3	FT232RL	Package_SO:SSOP-28_5.3x10.2mm_P0.65mm
+J2	282836-9	282836-9:SHDR9W130P0X500_1X9_4500X820X1020P
+J9	Power 5V DC	CON-SOCJ-2155:CONSOCJ2155
+J8	Power	CTB5202_3:SHDR3W100P0X500_1X3_1500X760X1020P
+J7	USB	10118194-0011LF:101181940011LF
+C21	470uF ESR	Capacitor_SMD:CP_Elec_8x10.5
+D4	VS-10BQ015-M3_5BT	VS-10BQ015-M3_5BT:DIOM5436X244N
+C17	22p	Capacitor_SMD:C_0805_2012Metric
+R20	10k	Resistor_SMD:R_1206_3216Metric
+D7	LL4148	smd-semi:SOD-80
+SW1	SW_DIP_x01	Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm
+U1	ATmega2560-16AU	Package_QFP:TQFP-100_14x14mm_P0.5mm
+J5	SIM	47553-1001:475531001

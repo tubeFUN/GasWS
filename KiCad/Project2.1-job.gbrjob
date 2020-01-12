@@ -7,14 +7,14 @@
       "Application": "Pcbnew",
       "Version":     "(5.1.4)-1"
     },
-    "CreationDate":  "2019-12-23T17:53:35+01:00"
+    "CreationDate":  "2020-01-12T22:13:26+01:00"
   },
   "GeneralSpecs":
   {
     "ProjectId":
     {
-      "Name": "Project1.1",
-      "GUID": "50726f6a-6563-4743-912e-312e6b696361",
+      "Name": "Project2.1",
+      "GUID": "50726f6a-6563-4743-922e-312e6b696361",
       "Revision": "1.0"
     },
     "Size":
@@ -40,37 +40,37 @@
   "FilesAttributes":
   [
     {
-      "Path":  "Project1.1-F_Cu.gtl",
+      "Path":  "Project2.1-F_Cu.gtl",
       "FileFunction":  "Copper,L1,Top",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Project1.1-B_Cu.gbl",
+      "Path":  "Project2.1-B_Cu.gbl",
       "FileFunction":  "Copper,L2,Bot",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Project1.1-F_SilkS.gto",
+      "Path":  "Project2.1-F_SilkS.gto",
       "FileFunction":  "Legend,Top",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Project1.1-B_SilkS.gbo",
+      "Path":  "Project2.1-B_SilkS.gbo",
       "FileFunction":  "Legend,Bot",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Project1.1-F_Mask.gts",
+      "Path":  "Project2.1-F_Mask.gts",
       "FileFunction":  "SolderMask,Top",
       "FilePolarity":  "Negative"
     },
     {
-      "Path":  "Project1.1-B_Mask.gbs",
+      "Path":  "Project2.1-B_Mask.gbs",
       "FileFunction":  "SolderMask,Bot",
       "FilePolarity":  "Negative"
     },
     {
-      "Path":  "Project1.1-Edge_Cuts.gm1",
+      "Path":  "Project2.1-Edge_Cuts.gm1",
       "FileFunction":  "Profile",
       "FilePolarity":  "Positive"
     }
