@@ -44,23 +44,23 @@ Real wiew of PCB bottom side. PCB version 1.0
 * AVRdude v6.3
 
 ## Setup
-In the first step, enter the phone number on line 19 of the Gas_warning_system_v21.ino file to which SMS notifications will be sent. Then prepare the Arduino IDE. To receive long SMS (160 characters) it is needed to extend serials buffer size. To do this in location:
-"C:\Program Files(x86)\Arduino\hardware\arduino\avr\cores\arduino\HardwareSerial.h
-change buffer size to:
-#define SERIAL_TX_BUFFER_SIZE 254
-#define SERIAL_RX_BUFFER_SIZE 254
+In the first step, enter the phone number on line 19 of the Gas_warning_system_v21.ino file to which SMS notifications will be sent. Then prepare the Arduino IDE. To receive long SMS (160 characters) it is needed to extend serials buffer size. To do this in the location:  
+"C:\Program Files(x86)\Arduino\hardware\arduino\avr\cores\arduino\HardwareSerial.h  
+change buffer size to:  
+#define SERIAL_TX_BUFFER_SIZE 254  
+#define SERIAL_RX_BUFFER_SIZE 254  
 In the next step, you need to compile the code in the Arduino IDE and export it to the .hex format, use the keyboard shortcut Ctrl + Alt + S. The imported files will appear in the folder in which we placed the Gas_warning_system_v21.ino file. We are interested in the Gas_warning_system_v21.ino.mega.hex file, which does not contain a bootloader. This file is uploaded to the microcontroller using the ISP programmer. I use USBAsp in combination with avrdude. If you prefer to use the "windows", I recommend the avrdude graphic overlay called AVRDUDESS 2.11. The Arduino IDE also allows programming of microcontrollers using an external programmer (USBasp), by the way, it uses avrdude. 
-Finally, set the fusebits.
-Default ATmega2560 fuses & lock bits:
-L 0x62
-H 0x99
-E 0xFF
-LB 0x3F
-GWS ATmega2560 fuses & lock bits:
-L 0xFF
-H 0xD8
-E 0xFC
-LB 0x3F
+Finally, set the fusebits.  
+Default ATmega2560 fuses & lock bits:  
+L 0x62  
+H 0x99  
+E 0xFF  
+LB 0x3F  
+GWS ATmega2560 fuses & lock bits:  
+L 0xFF  
+H 0xD8  
+E 0xFC  
+LB 0x3F  
 and you can enjoy a working alarm control system.
 
 ## Code Examples
