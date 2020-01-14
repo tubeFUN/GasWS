@@ -65,16 +65,12 @@ void setup()
    
   delay(60000); //Time required to connect to the network and worming sensor up
 
-  /* 
-   *  Initializing and checking GSM modem
-   *  To configure network time updating permanently to the modem
-   *  it is needed to send AT+CLTS=1;&W
-   *  then restart the modem, AT+CFUN=1,1
-   */
-  
+ 
   Serial1.println("AT"); //Check modem status
   while (modem_response() > 0); 
   Serial1.println("AT+IPR=9600"); //Permanently set modem baud rate to 9600
+  while (modem_response() > 0);
+  Serial1.println("AT+CLTS=1;&W"); //Permanently set network time updating
   while (modem_response() > 0);
   Serial1.println("AT+CMGF=1"); // Configuring SMS TEXT mode
   while (modem_response() > 0);
