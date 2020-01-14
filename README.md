@@ -49,13 +49,16 @@ In the first step, enter the phone number on line 19 of the Gas_warning_system_v
 change buffer size to:  
 #define SERIAL_TX_BUFFER_SIZE 254  
 #define SERIAL_RX_BUFFER_SIZE 254  
+
 In the next step, you need to compile the code in the Arduino IDE and export it to the .hex format, use the keyboard shortcut Ctrl + Alt + S. The imported files will appear in the folder in which we placed the Gas_warning_system_v21.ino file. We are interested in the Gas_warning_system_v21.ino.mega.hex file, which does not contain a bootloader. This file is uploaded to the microcontroller using the ISP programmer. I use USBAsp in combination with avrdude. If you prefer to use the "windows", I recommend the avrdude graphic overlay called AVRDUDESS 2.11. The Arduino IDE also allows programming of microcontrollers using an external programmer (USBasp), by the way, it uses avrdude. 
 Finally, set the fusebits.  
+
 Default ATmega2560 fuses & lock bits:  
 L 0x62  
 H 0x99  
 E 0xFF  
 LB 0x3F  
+
 GWS ATmega2560 fuses & lock bits:  
 L 0xFF  
 H 0xD8  
@@ -92,11 +95,11 @@ Project is based on... my need and to refresh my abilities.
 ![Parts used to build Gas Warning System](./Parts_list.txt)
 
 ## Allowed SMS commands to Gas Warning System
-* Halt - System halt
-* Start - System start
-* Level - Current gas level
-* Status - SMS with current date, time and gas level
-* Account - Account balance
+* Halt - Stops the system
+* Start - Starts the system
+* Level - Sends an SMS with the current gas level
+* Status - Sends an SMS with with the current date, time and gas level
+* Account - Account balance (to do)
 
 ## Principle of operation
 ![Board schematic](./img/Schematic2.1.pdf)
@@ -112,6 +115,7 @@ GSM block is based on SIM800C modem. Communication with uC is realized by UART1 
 
 ATmega2560 is the heart of the system. The same uC is used in Arduino Mega board. uC block is equipped with LEDs, tact switches, buzzer and of course connectors to communicate with sensors like MQ-2 Gas Sensor. Peripherals help user to indicate actual state of the system, do some simple actions or react to alarm. Chip programing is possible via ISP method.
 
+Transistors Q1 and Q3 with neighboring elements perform level conversion between UART (5V) and SIM800C modem (4V). The Q2 circuit is used to enable the SIM800C modem.
 
 ## Contact
-TBD
+vacuum.tube.fun@gmail.com
