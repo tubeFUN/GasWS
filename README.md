@@ -72,6 +72,7 @@ and you can enjoy a working alarm control system.
 
 ## Code Examples
 ![Bottom side real](./img/Communication.jpg){:height="50%" width="50%"}
+<img src="https://github.com/tubeFUN/GasWS/blob/master/img/Communication.jpg" width="400" height="100">
 Screenshot of SMS communication with GWS.
 
 ## Features
