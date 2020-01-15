@@ -33,6 +33,10 @@ Real wiew of PCB top side. PCB version 1.0
 ![Bottom side real](./img/Real_bottom_side.jpg)
 Real wiew of PCB bottom side. PCB version 1.0
 
+![Bottom side real](./img/Real_ready.jpg)
+View of the ready PCB, version 1.0.
+
+
 ## Technologies
 * Arduino 1.8.10 as an IDE
 * Arduino Mega 2560 as a testing board
@@ -67,7 +71,8 @@ LB 0x3F
 and you can enjoy a working alarm control system.
 
 ## Code Examples
-Show examples of usage: TBD
+![Bottom side real](./img/Communication.jpg)
+Screenshot of SMS communication with GWS.
 
 ## Features
 List of features ready and TODOs for future development
@@ -86,7 +91,7 @@ To-do list:
 * Adding more sensors and appropriate code
 
 ## Status
-Project is almost done. Electronic components are soldered, uC is programmed. Board is beaing tested.
+Project is done.
 
 ## Inspiration
 Project is based on... my need and to refresh my abilities.
