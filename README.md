@@ -71,7 +71,7 @@ LB 0x3F
 and you can enjoy a working alarm control system.
 
 ## Code Examples
-![Bottom side real](./img/Communication.jpg)
+![Bottom side real](./img/Communication.jpg){:height="50%" width="50%"}
 Screenshot of SMS communication with GWS.
 
 ## Features
