@@ -44,7 +44,11 @@ void setup()
   digitalWrite(pin_red_LED, 0);
   digitalWrite(pin_green_LED, 1);
   digitalWrite(pin_buzzer, 0);
-  digitalWrite(pin_SIM800_power, 1);  //Power up SIM800C module
+  digitalWrite(pin_SIM800_power, 1);  //Power up SIM800C module procedure
+  delay(2000); 
+  digitalWrite(pin_SIM800_power, 0); 
+  delay(1200); 
+  digitalWrite(pin_SIM800_power, 1); 
     
   Serial.begin(9600); //Communication with computer
   Serial1.begin(9600); //Communication with GSM modem
