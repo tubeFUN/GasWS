@@ -13,6 +13,7 @@
 
 
 int j = 0; //Auxiliary variable
+byte m = 0; //Auxiliary variable
 int gas_threshold = 700; //Set gas threshold (min 0 - max 1023)
 volatile int alarm_state = 1;
 int sensor_value = 0; //Gas sensor value
@@ -115,19 +116,23 @@ void loop()
     if (sensor_value > gas_threshold)//Go to stage two after crossing the gas threshold.
       alarm_state = 2;
 
-    if (check_reg_status()) //Modem restart procedure if modem is not registered
+    if (m == 255)
     {
-      Serial.println("Modem restart");
-      digitalWrite(pin_SIM800_power, 0);
-      delay(1200); 
-      digitalWrite(pin_SIM800_power, 1); 
-      delay(2000); 
-      digitalWrite(pin_SIM800_power, 0);
-      delay(1200);
-      digitalWrite(pin_SIM800_power, 1);
-      delay(25000); 
+      if (check_reg_status()) //Modem restart procedure if modem is not registered
+      {
+        Serial.println("Modem restart");
+        digitalWrite(pin_SIM800_power, 0);
+        delay(1200); 
+        digitalWrite(pin_SIM800_power, 1); 
+        delay(2000); 
+        digitalWrite(pin_SIM800_power, 0);
+        delay(1200);
+        digitalWrite(pin_SIM800_power, 1);
+        delay(25000); 
+      }
     }
-
+    m++;
+    
     if (receive_SMS()) //Checking if a new SMS is available
     {
       Serial.println("SMS reading...");
