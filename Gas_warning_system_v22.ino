@@ -17,10 +17,10 @@ byte m = 0; //Auxiliary variable
 int gas_threshold = 700; //Set gas threshold (min 0 - max 1023)
 volatile int alarm_state = 1;
 int sensor_value = 0; //Gas sensor value
-String destination_number1 = "000000000"; //9-digits format destination number
-String destination_number2 = "*124*#"; //USSD code (ORANGE, POLAND)
-char message1[] = "Welcome. Gas system armed"; //Message sent after initialization
-char message2[] = "Alarm - gas level exceed"; // Message sent after exceeding the gas set threshold
+char destination_number1[] = "000000000"; //9-digits format destination number
+char destination_number2[] = "*124*#"; //USSD code (ORANGE, POLAND)
+char message1[] = "Welcome. Gas Warning System armed."; //Message sent after initialization
+char message2[] = "Alarm - gas level exceed! Do something!"; // Message sent after exceeding the gas set threshold
 char message4[] = "Level"; //Message read out - Current gas level
 char message5[] = "Halt"; //Message read out - System halt
 char message6[] = "Start"; //Message read out - System start
@@ -31,6 +31,9 @@ char message11[] = "Account"; //Message read out - Account balance
 char date_AT[11]; //Date read from GSM network
 char time_AT[9]; //Time read from GSM network
 char readed_SMS[260]; //Readed SMS
+char CREG_message[30]; //Array to gather CREG message from the network
+char CCLK_message[60]; //Array to gather CCLK message from the network
+char CNMI_message[360]; //Array to gather CNMI message from the network
 
 
 void setup() 
@@ -54,11 +57,12 @@ void setup()
   Serial.begin(9600); //Communication with computer
   Serial1.begin(9600); //Communication with GSM modem
    
-  Serial.println("Welcome to Gas Warning System monitor");
+  Serial.println("Welcome to Gas Warning System serial monitor");
   Serial.println("Network connecting and warming sensor up...");
 
   Serial.print("Buffer size: ");
   Serial.println(Serial.availableForWrite());//Checking serials buffer size
+  Serial.println("Warming sensor up...");
   /*
    * To receive long SMS (160 characters) it is needed to extend serials buffer size.
    * To do this in location:
@@ -94,7 +98,7 @@ void setup()
   Serial1.println("AT+CPMS?"); //Preferred SMS storage.
   while (modem_response() > 0);
 
-  send_SMS(message1); //Send welcome SMS as a ssytem test
+  send_SMS(message1); //Send welcome SMS as a sytem test
 }
 
 
@@ -274,13 +278,17 @@ void loop()
 bool receive_SMS()
 {
   int k = 0;
-  char CNMI_message[360];
   while (Serial1.available() > 0)
   {
-    CNMI_message[k] = Serial1.read();
-    //Serial.print(CNMI_message[k]);
+    if (k < 359)
+    {
+      CNMI_message[k] = Serial1.read();
+      //Serial.print(CNMI_message[k]);
+      k++;
+      CNMI_message[k] = '\0'; //Terminate string array
+    }
+    else
     k++;
-    CNMI_message[k] = '\0'; //Terminate string array
   }
 
   /*
@@ -290,13 +298,13 @@ bool receive_SMS()
    
   if (k > 0)
   {
-    k = 0; //Looking for begin of raw SMS from CNMI message
+    k = 0; //Looking for begining of raw SMS from CNMI message
     while (!(CNMI_message[k] == '"' && CNMI_message[k + 1] == '\r'))
     {
       k++;
     }
     int i = 0;                             
-    while (!(CNMI_message[k + 3] == '\r')) //Looking for end of SMS 
+    while (!(CNMI_message[k + 3] == '\r')) //Looking for end of the SMS 
     {
       readed_SMS[i] = CNMI_message[k + 3];
       k++;
@@ -335,7 +343,6 @@ void get_time() //Getting the date and time from the network
 {
   Serial1.println("AT+CCLK?");
   delay(1000); //Wait for answer from the network
-  char CCLK_message[60]; //Array to gather answer from the network
   int k = 0;
   while(Serial1.available() > 0)
   {
@@ -346,33 +353,39 @@ void get_time() //Getting the date and time from the network
       Serial.print(CCLK_message[k]);
       CCLK_message[k] = '\0'; //Terminate string array
     }
+    else
+      k++;
   }
-  Serial.println(CCLK_message);
-  //Serial.print("Current date: ");
-  date_AT[0] = CCLK_message[25];
-  date_AT[1] = CCLK_message[26];
-  date_AT[2] = '.';
-  date_AT[3] = CCLK_message[22];
-  date_AT[4] = CCLK_message[23];
-  date_AT[5] = '.';
-  date_AT[6] = '2';
-  date_AT[7] = '0';
-  date_AT[8] = CCLK_message[19];
-  date_AT[9] = CCLK_message[20];
-  date_AT[10] = '\0'; // Terminate the array
-  //Serial.println(date_AT);
 
-  //Serial.print("Current time: ");
-  time_AT[0] = CCLK_message[28];
-  time_AT[1] = CCLK_message[29];
-  time_AT[2] = ':';
-  time_AT[3] = CCLK_message[31];
-  time_AT[4] = CCLK_message[32];
-  time_AT[5] = ':';
-  time_AT[6] = CCLK_message[34];
-  time_AT[7] = CCLK_message[35];
-  time_AT[8] = '\0'; // Terminate the array
-  //Serial.println(time_AT);
+  if (k > 0)
+  {
+    Serial.println(CCLK_message);
+    //Serial.print("Current date: ");
+    date_AT[0] = CCLK_message[25];
+    date_AT[1] = CCLK_message[26];
+    date_AT[2] = '.';
+    date_AT[3] = CCLK_message[22];
+    date_AT[4] = CCLK_message[23];
+    date_AT[5] = '.';
+    date_AT[6] = '2';
+    date_AT[7] = '0';
+    date_AT[8] = CCLK_message[19];
+    date_AT[9] = CCLK_message[20];
+    date_AT[10] = '\0'; // Terminate the array
+    //Serial.println(date_AT);
+  
+    //Serial.print("Current time: ");
+    time_AT[0] = CCLK_message[28];
+    time_AT[1] = CCLK_message[29];
+    time_AT[2] = ':';
+    time_AT[3] = CCLK_message[31];
+    time_AT[4] = CCLK_message[32];
+    time_AT[5] = ':';
+    time_AT[6] = CCLK_message[34];
+    time_AT[7] = CCLK_message[35];
+    time_AT[8] = '\0'; // Terminate the array
+    //Serial.println(time_AT);
+  }
 }
 
 
@@ -387,7 +400,7 @@ void send_SMS(char a[]) //Sending SMS
   delay(5000);
   Serial.println("SMS sent");
   Serial1.println("AT+CMGDA=\"DEL ALL\""); //Delete All SMS
-  delay(5000); //Time required to delete 1 message
+  delay(5000); //Max time required to delete 1 message
 }
 
 
@@ -436,17 +449,23 @@ bool check_reg_status()
 {
   Serial1.println("AT+CREG?"); //Checks registration status
   delay(1000);
-  char CREG_message[30]; //Array to gather answer from the network
   int k = 0;
   while(Serial1.available() > 0)
   {
-    CREG_message[k] = Serial1.read();//Saving answer to the array
-    k++;
-    CREG_message[k] = '\0'; //Terminate string array
+    if (k < 29)
+    {
+      CREG_message[k] = Serial1.read();//Saving answer to the array
+      k++;
+      CREG_message[k] = '\0'; //Terminate string array
+    }
+    else
+      k++;
   }
-  if (CREG_message[18] == '0' && CREG_message[20] != '1') //Checks two characters of CREG message
+
+  if (k > 0)
   {
-    return 1;  
+    if (CREG_message[18] == '0' && CREG_message[20] != '1') //Checks two characters of CREG message
+      return 1;
   }
   return 0;
 }
